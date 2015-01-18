@@ -1,0 +1,189 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
+    }
+}
+
+description = 'Burrows Applications Finance API'
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+
+    apply plugin: 'java'
+
+    group = "burrows.api"
+    version = "0.0.1"
+
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+
+    dependencies {
+        testCompile 'org.hamcrest:hamcrest-integration:1.1'
+        testCompile 'org.hamcrest:hamcrest-library:1.1'
+        testCompile('junit:junit:4.11') {
+            exclude module: 'hamcrest-core'
+        }
+    }
+
+    tasks.withType(JavaCompile) {
+        configure(options) {
+            compilerArgs << '-Xlint:deprecation' << '-Xlint:unchecked'
+            deprecation = true
+            encoding = 'UTF-8'
+//        fork = true
+//        incremental = true
+        }
+    }
+
+    tasks.withType(Javadoc) {
+        title = "${project.name} ${project.version} API"
+        configure(options) {
+            header = project.name
+            encoding "UTF-8"
+            docEncoding "UTF-8"
+            charSet "UTF-8"
+            linkSource true
+            author = true
+            links(["http://docs.oracle.com/javase/8/docs/api/",
+                   "http://docs.oracle.com/javaee/7/api/"] as String[])
+            exclude '**/*Test.java'
+            if (JavaVersion.current().isJava8Compatible()) {
+                addStringOption('Xdoclint:none', '-quiet')
+            }
+        }
+    }
+}
+
+task allJavadoc(type: Javadoc) {
+    source subprojects.collect { project -> project.sourceSets.main.allJava }
+    classpath = files(subprojects.collect { project -> project.sourceSets.main.compileClasspath })
+    destinationDir = file("${buildDir}/docs/javadoc")
+}
+
+def hasBintrayProperties() {
+    return project.hasProperty('bintrayUsername') && project.hasProperty('bintrayApiKey')
+}
+
+def hasSonatypeProperties() {
+    return project.hasProperty('sonatypeUsername') && project.hasProperty('sonatypePassword')
+}
+
+def hasReleaseProperties() {
+    return hasBintrayProperties() && hasSonatypeProperties()
+}
+
+subprojects {
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier = 'javadoc'
+        from javadoc.destinationDir
+    }
+
+    task testsJar(type: Jar) {
+        classifier = 'tests'
+        from sourceSets.test.output
+    }
+
+    task reportsZip(type: Zip) {
+        dependsOn check
+        classifier = 'reports'
+        from reporting.baseDir
+    }
+
+    if (hasReleaseProperties()) {
+        apply plugin: 'maven-publish'
+        apply plugin: 'com.jfrog.bintray'
+
+        bintrayUpload.dependsOn jar, sourcesJar, javadocJar, testsJar, reportsZip
+        bintrayUpload.dependsOn("generatePomFileForMavenPublication")
+
+        publish.dependsOn jar, sourcesJar, javadocJar, testsJar, reportsZip
+        publish.dependsOn("generatePomFileForMavenPublication")
+
+        def pomConfig = {
+            name project.name
+            packaging 'jar'
+            description project.description
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+            developers {
+                developer {
+                    id 'jaredsburrows'
+                    name 'Jared Burrows'
+                    email 'jaredsburrows@gmail.com'
+                }
+            }
+            scm {
+                connection 'scm:https://jaredsburrows@github.com/jaredsburrows/FinanceApi'
+                developerConnection 'scm:git@github.com:jaredsburrows/FinanceApi.git'
+                url 'https://github.com/jaredsburrows/FinanceApi'
+            }
+        }
+
+
+        publishing {
+            publications {
+                maven(MavenPublication) {
+                    from components.java
+                    artifact sourcesJar
+                    artifact javadocJar
+                    artifact testsJar
+                    artifact reportsZip
+
+                    pom.withXml {
+                        def root = asNode()
+                        root.children().last() + pomConfig
+                    }
+                }
+            }
+        }
+
+        bintray {
+            user = bintrayUsername
+            key = bintrayApiKey
+            publications = ['maven'] // maven, mavenJava
+            publish = true
+            pkg {
+                repo = 'maven'
+                name = project.name
+                desc = project.description
+                websiteUrl = 'https://github.com/jaredsburrows/FinanceApi'
+                issueTrackerUrl = 'https://github.com/jaredsburrows/FinanceApi/issues'
+                vcsUrl = 'https://github.com/jaredsburrows/FinanceApi.git'
+                licenses = ['Apache-2.0']
+                labels = ['Burrows', 'Applications', 'Finance', 'API']
+                publicDownloadNumbers = true
+                //noinspection GroovyAssignabilityCheck
+                version {
+                    name = project.version
+                    desc = project.description
+//                    gpg {
+//                        sign = true //Determines whether to GPG sign the files.
+//                    passphrase = 'passphrase' //Optional. The passphrase for GPG signing'
+//                    }
+                    mavenCentralSync {
+                        sync = false
+                        user = sonatypeUsername
+                        password = sonatypePassword
+                        close = '1'
+                    }
+                }
+            }
+        }
+    }
+}

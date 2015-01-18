@@ -1,0 +1,3 @@
+rootProject.name = 'FinanceApi'
+
+include ':finance-api', ':finance-core'

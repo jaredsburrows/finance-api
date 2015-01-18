@@ -1,0 +1,32 @@
+language: java
+
+jdk:
+  - oraclejdk7
+  - oraclejdk8
+
+script:
+  - ./gradlew clean check
+
+branches:
+  except:
+    - gh-pages
+
+notifications:
+  email: false
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.m2
+
+env:
+  global:
+    secure: HA2+DFURcrXZFI+oDOotxXKdqBUFfYjel/jFKUOXTPZUmwMafRusYDMBy93xVFoYFSmYq+KsU5ty1bX3V/jGi06/NccjQaI6+2htXqcRsk37W+z9ywit+6JnkRrOmPJZVnRNyjLW1lnH3Y9dr32ol5h1S87FVyYGtP5sYdu04U4=
+
+before_install:
+  - chmod +x .travis/publishJavadoc.sh
+
+after_success:
+  - pwd
+  - .travis/publishJavadoc.sh

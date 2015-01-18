@@ -1,5 +1,17 @@
+# Gradle
 .gradle
 build/
+
+# Mac OSX
+.DS_Store
+
+# IDEA
+.idea/
+*.iml
+
+# Java
+libs/*.jar
+*.class
 
 # Ignore Gradle GUI config
 gradle-app.setting
