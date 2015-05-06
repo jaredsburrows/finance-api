@@ -1,6 +1,0 @@
-description = 'Core'
-
-dependencies {
-    compile project(':finance-api')
-    compile 'org.apache.commons:commons-lang3:3.3.2'
-}

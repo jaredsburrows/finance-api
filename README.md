@@ -1,9 +1,7 @@
-FinanceAPI -- BETA
+FinanceAPI -- BETA [![Build Status](https://travis-ci.org/jaredsburrows/FinanceApi.svg?branch=master)](https://travis-ci.org/jaredsburrows/FinanceApi) [![Coverage Status](https://coveralls.io/repos/jaredsburrows/FinanceApi/badge.svg?branch=master)](https://coveralls.io/r/jaredsburrows/FinanceApi?branch=master)
 =================
 
 Simple Finance API for viewing stock quotes
-
- [ ![Status](https://travis-ci.org/jaredsburrows/FinanceApi.svg) ](https://travis-ci.org/jaredsburrows/FinanceApi)
 
 ## Usage:
 
@@ -20,11 +18,11 @@ Simple Finance API for viewing stock quotes
 ## Examples:
 
     // Create basic Request URL
-    String requestURL = RequestURL.Builder()
-            .withCompany(Company.YAHOO)        // Set the Company API
-            .withFormat(Format.DEFAULT)        // Set the Format for the data returned
-            .addQuote("PG")                    // Add a Quote
-            .buildURL();
+    String requestUrl = Builders.request()
+                    .withYahoo()                // Set the Company API
+                    .outputJSON()               // Set the Format for the data returned
+                    .getQuote("MSFT")           // Add a Quote
+                    .buildURL();
 
 
 ## License:
