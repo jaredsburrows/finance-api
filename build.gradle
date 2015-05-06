@@ -25,6 +25,7 @@ description = 'Burrows Applications Finance API'
 version = '0.0.1'
 
 dependencies {
+    compile 'com.squareup.okhttp:okhttp:2.3.0'
     compile 'org.apache.commons:commons-lang3:3.4'
     compile 'junit:junit:4.12'
     testCompile 'org.codehaus.groovy:groovy-all:2.4.3'

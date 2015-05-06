@@ -4,11 +4,12 @@ import burrows.api.finance.model.Config;
 import burrows.api.finance.model.Config.Output;
 
 public interface Format {
-    public Quote withXML();
 
-    public Quote withJSON();
+    public Quote outputCSV();
 
-    public Quote withCSV();
+    public Quote outputJSON();
+
+    public Quote outputXML();
 
     public class Impl implements Format {
 
@@ -19,17 +20,17 @@ public interface Format {
         }
 
         @Override
-        public Quote withCSV() {
+        public Quote outputCSV() {
             return new Quote.Impl(this.config.setOutput(Output.CSV));
         }
 
         @Override
-        public Quote withJSON() {
+        public Quote outputJSON() {
             return new Quote.Impl(this.config.setOutput(Output.JSON));
         }
 
         @Override
-        public Quote withXML() {
+        public Quote outputXML() {
             return new Quote.Impl(this.config.setOutput(Output.XML));
         }
     }
