@@ -19,9 +19,10 @@ Simple Finance API for viewing stock quotes
 
     // Create basic Request URL
     String requestUrl = Builders.request()
-                    .withYahoo()                // Set the Company API
-                    .outputJSON()               // Set the Format for the data returned
-                    .getQuote("MSFT")           // Add a Quote
+                    .withYahoo()                 // Set the Company API
+                    .withProperty(Property.Name) // Set the Properties, (eg. Name of the company)
+                    .outputJSON()                // Set the Format for the data returned
+                    .getQuote("MSFT")            // Add a Quote
                     .buildURL();
 
 

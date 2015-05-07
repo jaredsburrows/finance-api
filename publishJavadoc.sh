@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SLUG="jaredsburrows/FinanceApi"
-JDK="oraclejdk7"
+JDK="oraclejdk8"
 BRANCH="master"
 
 #set -e
