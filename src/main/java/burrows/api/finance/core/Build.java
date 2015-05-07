@@ -47,7 +47,7 @@ public interface Build {
         }
 
         private String run(final String url) throws IOException {
-            return client.newCall(new Request.Builder().url(url).build()).execute().body().string();
+            return client.newCall(new Request.Builder().url(url).build()).execute().body().string().trim();
         }
     }
 }

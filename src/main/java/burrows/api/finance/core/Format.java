@@ -7,9 +7,8 @@ public interface Format {
 
     public Quote outputCSV();
 
-    public Quote outputJSON();
-
-    public Quote outputXML();
+//    public Quote outputJSON();
+//    public Quote outputXML();
 
     public class Impl implements Format {
 
@@ -24,14 +23,13 @@ public interface Format {
             return new Quote.Impl(this.config.setOutput(Output.CSV));
         }
 
-        @Override
-        public Quote outputJSON() {
-            return new Quote.Impl(this.config.setOutput(Output.JSON));
-        }
-
-        @Override
-        public Quote outputXML() {
-            return new Quote.Impl(this.config.setOutput(Output.XML));
-        }
+//        @Override
+//        public Quote outputJSON() {
+//            return new Quote.Impl(this.config.setOutput(Output.JSON));
+//        }
+//        @Override
+//        public Quote outputXML() {
+//            return new Quote.Impl(this.config.setOutput(Output.XML));
+//        }
     }
 }

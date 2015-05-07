@@ -9,9 +9,5 @@ build/
 .idea/
 *.iml
 
-# Java
-libs/*.jar
-*.class
-
 # Ignore Gradle GUI config
 gradle-app.setting

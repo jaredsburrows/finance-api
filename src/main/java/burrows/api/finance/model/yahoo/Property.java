@@ -162,7 +162,7 @@ public enum Property {
      * @see #getIntValue()
      * @since 0.0.1
      */
-    public static Property fromInt(int intValue) {
+    public static Property fromInt(final int intValue) {
         for (Property instance : values()) {
             if (instance.intValue == intValue) {
                 return instance;
@@ -181,7 +181,7 @@ public enum Property {
      * @see #getStringValue()
      * @since 0.0.1
      */
-    public static Property fromString(String stringValue) {
+    public static Property fromString(final String stringValue) {
         if (stringValue == null || stringValue.length() == 0) {
             return null;
         }
@@ -204,7 +204,7 @@ public enum Property {
      * @see #getTagValue()
      * @since 0.0.1
      */
-    public static Property fromTag(String tagValue) {
+    public static Property fromTag(final String tagValue) {
         if (tagValue == null || tagValue.length() == 0) {
             return null;
         }
