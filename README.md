@@ -1,4 +1,4 @@
-FinanceAPI -- BETA [![Build Status](https://travis-ci.org/jaredsburrows/FinanceApi.svg?branch=master)](https://travis-ci.org/jaredsburrows/FinanceApi) [![Coverage Status](https://coveralls.io/repos/jaredsburrows/FinanceApi/badge.svg?branch=master)](https://coveralls.io/r/jaredsburrows/FinanceApi?branch=master)
+FinanceAPI -- BETA [![Build Status](https://travis-ci.org/jaredsburrows/finance-api.svg?branch=master)](https://travis-ci.org/jaredsburrows/finance-api) [![Coverage Status](https://coveralls.io/repos/jaredsburrows/finance-api/badge.svg?branch=master)](https://coveralls.io/r/jaredsburrows/finance-api?branch=master)
 =================
 
 Simple Finance API for viewing stock quotes
