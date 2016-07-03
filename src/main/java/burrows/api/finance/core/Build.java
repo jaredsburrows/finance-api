@@ -1,23 +1,22 @@
 package burrows.api.finance.core;
 
+import burrows.api.finance.model.Config;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 
 import java.io.IOException;
 
-import burrows.api.finance.model.Config;
-
 public interface Build {
 
-    public OkHttpClient client = new OkHttpClient();
+    OkHttpClient client = new OkHttpClient();
 
-    public String build();
+    String build();
 
-    public Config buildConfig();
+    Config buildConfig();
 
-    public String buildURL();
+    String buildURL();
 
-    public class Impl implements Build {
+    class Impl implements Build {
         final private Config config;
 
         public Impl(final Config config) {

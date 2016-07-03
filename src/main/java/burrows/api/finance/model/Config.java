@@ -1,13 +1,11 @@
 package burrows.api.finance.model;
 
+import burrows.api.finance.model.yahoo.Property;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Assert;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
-import burrows.api.finance.model.yahoo.Property;
 
 /**
  * Request URL Data for creating HTTP requests.
@@ -17,6 +15,7 @@ import burrows.api.finance.model.yahoo.Property;
  * @since 0.0.1
  */
 public class Config {
+
     private final static String YAHOO_FINANCE_BASE_URL = "http://download.finance.yahoo.com/d/quotes.csv?";
     private final static String YAHOO_FINANCE_STOCKS = "s=";
     private final static String YAHOO_FINANCE_PROPERTIES = "&f=";
@@ -43,7 +42,6 @@ public class Config {
     }
 
     public Config setOutput(final Output output) {
-        Assert.assertNotNull("Output can't be null.", output);
         this.output = output;
         return this;
     }
@@ -53,7 +51,6 @@ public class Config {
     }
 
     public Config setService(final Service service) {
-        Assert.assertNotNull("Service can't be null.", service);
         this.service = service;
         return this;
     }
@@ -63,15 +60,11 @@ public class Config {
     }
 
     public Config addQuote(final String quote) {
-        Assert.assertNotNull("Quote can't be null.", quote);
-        Assert.assertFalse("Quote can't be empty.", quote.isEmpty());
         this.quotes.add(quote);
         return this;
     }
 
     public Config addQuotes(final Collection<String> quotes) {
-        Assert.assertNotNull("Quotes can't be null.", quotes);
-        Assert.assertFalse("Quotes can't be empty.", quotes.isEmpty());
         this.quotes.addAll(quotes);
         return this;
     }
@@ -81,15 +74,11 @@ public class Config {
     }
 
     public Config addProperty(final Property property) {
-        Assert.assertNotNull("Property can't be null.", property);
         this.properties.add(property.getTagValue());
         return this;
     }
 
     public Config addProperties(final Collection<Property> properties) {
-        Assert.assertNotNull("Properties can't be null.", properties);
-        Assert.assertFalse("Properties can't be empty.", properties.isEmpty());
-
         for (final Property property : properties) {
             this.properties.add(property.getTagValue());
         }

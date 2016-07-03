@@ -1,20 +1,20 @@
 package burrows.api.finance.core;
 
-import java.util.Arrays;
-import java.util.Collection;
-
 import burrows.api.finance.model.Config;
 import burrows.api.finance.model.yahoo.Property;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 public interface YahooProperties {
 
-    public YahooFormat withProperty(final Property property);
+    YahooFormat withProperty(final Property property);
 
-    public YahooFormat withProperties(final Collection<Property> properties);
+    YahooFormat withProperties(final Collection<Property> properties);
 
-    public YahooFormat withProperties(final Property... properties);
+    YahooFormat withProperties(final Property... properties);
 
-    public class Impl implements YahooProperties {
+    class Impl implements YahooProperties {
 
         final private Config config;
 

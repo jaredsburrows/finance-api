@@ -5,12 +5,12 @@ import burrows.api.finance.model.Config.Output;
 
 public interface Format {
 
-    public Quote outputCSV();
+    Quote outputCSV();
 
 //    public Quote outputJSON();
 //    public Quote outputXML();
 
-    public class Impl implements Format {
+    class Impl implements Format {
 
         final private Config config;
 

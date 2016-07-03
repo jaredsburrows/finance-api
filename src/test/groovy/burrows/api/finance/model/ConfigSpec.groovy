@@ -66,13 +66,6 @@ class ConfigSpec extends Specification {
 
         then:
         config.getOutput() == Output.XML
-
-        when:
-        config.setOutput(null)
-
-        then:
-        def e = thrown(AssertionError)
-        e.message == "Output can't be null."
     }
 
     def "Service - getter/setter"() {
@@ -81,13 +74,6 @@ class ConfigSpec extends Specification {
 
         then:
         config.getService() == Service.GOOGLE
-
-        when:
-        config.setService(null)
-
-        then:
-        def e = thrown(AssertionError)
-        e.message == "Service can't be null."
     }
 
     def "Quote - getter/setter"() {
@@ -102,34 +88,6 @@ class ConfigSpec extends Specification {
 
         then:
         config.getQuotes() == ["GOOG", "MSFT"] as Set
-
-        when:
-        config.addQuote(null)
-
-        then:
-        def e = thrown(AssertionError)
-        e.message == "Quote can't be null."
-
-        when:
-        config.addQuotes(null)
-
-        then:
-        e = thrown(AssertionError)
-        e.message == "Quotes can't be null."
-
-        when:
-        config.addQuote("")
-
-        then:
-        e = thrown(AssertionError)
-        e.message == "Quote can't be empty."
-
-        when:
-        config.addQuotes([])
-
-        then:
-        e = thrown(AssertionError)
-        e.message == "Quotes can't be empty."
     }
 
     def "Properties - getter/setter"() {
@@ -144,27 +102,6 @@ class ConfigSpec extends Specification {
 
         then:
         config.getProperties() == ["c8", "g3"] as Set
-
-        when:
-        config.addProperty(null)
-
-        then:
-        def e = thrown(AssertionError)
-        e.message == "Property can't be null."
-
-        when:
-        config.addProperties(null)
-
-        then:
-        e = thrown(AssertionError)
-        e.message == "Properties can't be null."
-
-        when:
-        config.addProperties([])
-
-        then:
-        e = thrown(AssertionError)
-        e.message == "Properties can't be empty."
     }
 
     def "default values"() {

@@ -186,7 +186,7 @@ public enum Property {
             return null;
         }
 
-        for (Property instance : values()) {
+        for (final Property instance : values()) {
             if (instance.stringValue.equalsIgnoreCase(stringValue)) {
                 return instance;
             }
@@ -209,7 +209,7 @@ public enum Property {
             return null;
         }
 
-        for (Property instance : values()) {
+        for (final Property instance : values()) {
             if (instance.tagValue.equalsIgnoreCase(tagValue)) {
                 return instance;
             }

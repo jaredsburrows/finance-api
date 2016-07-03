@@ -5,7 +5,7 @@ import burrows.api.finance.model.Config.Output;
 
 public interface YahooFormat extends Format {
 
-    public class Impl implements YahooFormat {
+    class Impl implements YahooFormat {
 
         final private Config config;
 

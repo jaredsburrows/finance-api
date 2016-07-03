@@ -1,18 +1,19 @@
 package burrows.api.finance.core;
 
+import burrows.api.finance.model.Config;
+
 import java.util.Arrays;
 import java.util.Collection;
 
-import burrows.api.finance.model.Config;
-
 public interface Quote {
-    public Build getQuote(final String quotes);
 
-    public Build getQuotes(final Collection<String> quotes);
+    Build getQuote(final String quotes);
 
-    public Build getQuotes(final String... quotes);
+    Build getQuotes(final Collection<String> quotes);
 
-    public class Impl implements Quote {
+    Build getQuotes(final String... quotes);
+
+    class Impl implements Quote {
 
         final private Config config;
 

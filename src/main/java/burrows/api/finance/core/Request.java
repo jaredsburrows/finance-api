@@ -7,13 +7,13 @@ import burrows.api.finance.model.Config.Service;
 
 public interface Request {
 
-    public OkHttpClient client = new OkHttpClient();
+    OkHttpClient client = new OkHttpClient();
 
-    public YahooProperties withYahoo();
+    YahooProperties withYahoo();
 
-    public Format withGoogle();
+    Format withGoogle();
 
-    public class Impl implements Request {
+    class Impl implements Request {
 
         final private Config config = new Config();
 

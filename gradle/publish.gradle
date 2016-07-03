@@ -1,0 +1,98 @@
+def pomConfig = {
+    name project.name
+    packaging "jar"
+    description project.description
+
+    licenses {
+        license {
+            name "The Apache Software License, Version 2.0"
+            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            distribution "repo"
+        }
+    }
+
+    developers {
+        developer {
+            id "jaredsburrows"
+            name "Jared Burrows"
+            email "jaredsburrows@gmail.com"
+        }
+    }
+
+    scm {
+        connection "scm:https://jaredsburrows@github.com/jaredsburrows/finance-api"
+        developerConnection "scm:git@github.com:jaredsburrows/finance-api.git"
+        url "https://github.com/jaredsburrows/finance-api"
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            artifact testsJar
+            artifact reportsZip
+
+            pom.withXml {
+                def root = asNode()
+                root.children().last() + pomConfig
+            }
+        }
+    }
+}
+
+bintray {
+    user = project.hasProperty("bintrayUsername") ? project.property("bintrayUsername") : ""
+    key = project.hasProperty("bintrayApiKey") ? project.property("bintrayApiKey") : ""
+    publications = ["maven"]
+    publish = true
+    pkg {
+        repo = "maven"
+        name = project.name
+        desc = project.description
+        websiteUrl = "https://github.com/jaredsburrows/finance-api"
+        issueTrackerUrl = "https://github.com/jaredsburrows/finance-api/issues"
+        vcsUrl = "https://github.com/jaredsburrows/finance-api.git"
+        licenses = ["Apache-2.0"]
+        labels = ["burrows", "apps", "finance", "api"]
+        version {
+            name = project.version
+            desc = project.description
+            mavenCentralSync {
+                sync = false
+                user = project.hasProperty("sonatypeUsername") ? project.property("sonatypeUsername") : ""
+                password = project.hasProperty("sonatypeUsername") ? project.property("sonatypePassword") : ""
+                close = "1"
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = "sources"
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = "javadoc"
+    from javadoc.destinationDir
+}
+
+task testsJar(type: Jar) {
+    classifier = "tests"
+    from sourceSets.test.output
+}
+
+task reportsZip(type: Zip) {
+    dependsOn check
+    classifier = "reports"
+    from reporting.baseDir
+}
+
+bintrayUpload.dependsOn jar, sourcesJar, javadocJar, testsJar, reportsZip
+bintrayUpload.dependsOn("generatePomFileForMavenPublication")
+
+publish.dependsOn jar, sourcesJar, javadocJar, testsJar, reportsZip
+publish.dependsOn("generatePomFileForMavenPublication")

@@ -1,17 +1,13 @@
 language: java
 
 jdk:
- - oraclejdk8
+  - oraclejdk8
 
-before_install:
- - chmod +x publishJavadoc.sh
+install: true
 
 script:
- - ./gradlew clean assemble check --stacktrace
-
-after_success:
- - ./gradlew jacocoTestReport coveralls --stacktrace
- - ./publishJavadoc.sh
+  - ./gradlew clean build jacocoTestReport coveralls -Dscan --configure-on-demand --daemon --parallel --stacktrace
+  - .buildscript/publishDocs.sh
 
 branches:
   except:
@@ -22,10 +18,14 @@ notifications:
 
 sudo: false
 
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
 cache:
   directories:
     - $HOME/.gradle
 
 env:
   global:
-    secure: HA2+DFURcrXZFI+oDOotxXKdqBUFfYjel/jFKUOXTPZUmwMafRusYDMBy93xVFoYFSmYq+KsU5ty1bX3V/jGi06/NccjQaI6+2htXqcRsk37W+z9ywit+6JnkRrOmPJZVnRNyjLW1lnH3Y9dr32ol5h1S87FVyYGtP5sYdu04U4=
+    - secure: "Vr8A6xje6YIEGgEfiFAALjc3XrDqR6llYHpPjmBDiBwBdt/EqkSMUtpRu1bF6zwHqNF9vcWC5WItA0xs2xcbbZrhLz1W2PWdzlLXl1vt/+7Pm+gPGApU5SBZqVmobPkxLIV/c5di2R3NOaPEq9C1063XacqTNV7fWLytHi3nOMM="
