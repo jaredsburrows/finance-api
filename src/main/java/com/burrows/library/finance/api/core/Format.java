@@ -1,7 +1,6 @@
-package burrows.api.finance.core;
+package com.burrows.library.finance.api.core;
 
-import burrows.api.finance.model.Config;
-import burrows.api.finance.model.Config.Output;
+import com.burrows.library.finance.api.model.Config;
 
 public interface Format {
 
@@ -20,7 +19,7 @@ public interface Format {
 
         @Override
         public Quote outputCSV() {
-            return new Quote.Impl(this.config.setOutput(Output.CSV));
+            return new Quote.Impl(this.config.setOutput(Config.Output.CSV));
         }
 
 //        @Override

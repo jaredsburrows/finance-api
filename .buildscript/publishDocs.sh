@@ -4,13 +4,13 @@ SLUG="jaredsburrows/finance-api"
 BRANCH="master"
 
 if [ "$TRAVIS_REPO_SLUG" != "$SLUG" ]; then
-    echo "Sipping: wrong repository. Expected '$SLUG' but was '$TRAVIS_REPO_SLUG'."
+    echo "Skipping: wrong repository. Expected '$SLUG' but was '$TRAVIS_REPO_SLUG'."
 elif [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
     echo "Skipping: was pull request."
 elif [ "$TRAVIS_BRANCH" != "$BRANCH" ]; then
     echo "Skipping: wrong branch. Expected '$BRANCH' but was '$TRAVIS_BRANCH'."
 else
-    echo -e "Publishing javadoc...\n"
+    echo -e "Publishing docs...\n"
 
     # Generate docs
     ./gradlew clean javadoc
@@ -32,5 +32,5 @@ else
     git commit -m "Publish docs from Travis CI build $TRAVIS_BUILD_NUMBER"
     git push -fq origin gh-pages > /dev/null
 
-    echo -e "Published Javadoc to gh-pages.\n"
+    echo -e "Published docs to gh-pages.\n"
 fi

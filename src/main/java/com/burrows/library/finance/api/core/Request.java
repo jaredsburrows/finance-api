@@ -1,9 +1,7 @@
-package burrows.api.finance.core;
+package com.burrows.library.finance.api.core;
 
+import com.burrows.library.finance.api.model.Config;
 import com.squareup.okhttp.OkHttpClient;
-
-import burrows.api.finance.model.Config;
-import burrows.api.finance.model.Config.Service;
 
 public interface Request {
 
@@ -19,12 +17,12 @@ public interface Request {
 
         @Override
         public YahooProperties withYahoo() {
-            return new YahooProperties.Impl(this.config.setService(Service.YAHOO));
+            return new YahooProperties.Impl(this.config.setService(Config.Service.YAHOO));
         }
 
         @Override
         public Format withGoogle() {
-            return new Format.Impl(this.config.setService(Service.GOOGLE));
+            return new Format.Impl(this.config.setService(Config.Service.GOOGLE));
         }
     }
 }

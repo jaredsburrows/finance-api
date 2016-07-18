@@ -1,4 +1,4 @@
-package burrows.api.finance.model.yahoo;
+package com.burrows.library.finance.api.model.yahoo;
 
 /**
  * An enumeration that represents the companies that the Yahoo API supports.

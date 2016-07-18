@@ -1,6 +1,6 @@
-package burrows.api.finance.model;
+package com.burrows.library.finance.api.model;
 
-import burrows.api.finance.model.yahoo.Property;
+import com.burrows.library.finance.api.model.yahoo.Property;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collection;
@@ -11,7 +11,7 @@ import java.util.Set;
  * Request URL Data for creating HTTP requests.
  *
  * @author <a href="mailto:jaredsburrows@gmail.com">Jared Burrows</a>
- * @see burrows.api.finance.model.yahoo.Property
+ * @see Property
  * @since 0.0.1
  */
 public class Config {

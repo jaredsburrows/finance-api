@@ -1,4 +1,4 @@
-package burrows.api.finance.core;
+package com.burrows.library.finance.api.core;
 
 public class Builders {
     public static Request request() {

@@ -1,7 +1,7 @@
-package burrows.api.finance.core;
+package com.burrows.library.finance.api.core;
 
-import burrows.api.finance.model.Config;
-import burrows.api.finance.model.yahoo.Property;
+import com.burrows.library.finance.api.model.Config;
+import com.burrows.library.finance.api.model.yahoo.Property;
 
 import java.util.Arrays;
 import java.util.Collection;

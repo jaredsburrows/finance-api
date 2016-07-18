@@ -1,4 +1,4 @@
-package burrows.api.finance.model.yahoo
+package com.burrows.library.finance.api.model.yahoo
 
 import spock.lang.Specification
 

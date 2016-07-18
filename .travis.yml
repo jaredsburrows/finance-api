@@ -7,7 +7,7 @@ install: true
 
 script:
   - ./gradlew clean build jacocoTestReport coveralls -Dscan --configure-on-demand --daemon --parallel --stacktrace
-  - .buildscript/publishDocs.sh
+        && .buildscript/publishDocs.sh
 
 branches:
   except:
