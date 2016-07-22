@@ -1,3 +1,42 @@
+/**
+ * Create jar of the sources of library.
+ */
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = "sources"
+    from sourceSets.main.allSource
+}
+
+/**
+ * Create javadoc jar of Java documentation.
+ */
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = "javadoc"
+    from javadoc.destinationDir
+}
+
+/**
+ * Create compiled jar of library.
+ */
+task mainJar(type: Jar) {
+    from sourceSets.main.output
+}
+
+/**
+ * Create jar of all tests.
+ */
+task testsJar(type: Jar) {
+    classifier = "tests"
+    from sourceSets.test.output
+}
+
+/**
+ * Create a zip of all reports.
+ */
+task reportsZip(type: Zip, dependsOn: check) {
+    classifier = "reports"
+    from reporting.baseDir
+}
+
 def pomConfig = {
     resolveStrategy = Closure.DELEGATE_FIRST
     name project.name
@@ -62,6 +101,8 @@ publishing {
         }
     }
 }
+publish.dependsOn jar, sourcesJar, javadocJar, testsJar, reportsZip
+publish.dependsOn "generatePomFileForMavenPublication"
 
 bintray {
     user = project.hasProperty("bintrayUsername") ? project.property("bintrayUsername") : ""
@@ -89,48 +130,5 @@ bintray {
         }
     }
 }
-
-/**
- * Create jar of the sources of library.
- */
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = "sources"
-    from sourceSets.main.allSource
-}
-
-/**
- * Create javadoc jar of Java documentation.
- */
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = "javadoc"
-    from javadoc.destinationDir
-}
-
-/**
- * Create compiled jar of library.
- */
-task mainJar(type: Jar) {
-    from sourceSets.main.output
-}
-
-/**
- * Create jar of all tests.
- */
-task testsJar(type: Jar) {
-    classifier = "tests"
-    from sourceSets.test.output
-}
-
-/**
- * Create a zip of all reports.
- */
-task reportsZip(type: Zip, dependsOn: check) {
-    classifier = "reports"
-    from reporting.baseDir
-}
-
 bintrayUpload.dependsOn jar, sourcesJar, javadocJar, testsJar, reportsZip
 bintrayUpload.dependsOn "generatePomFileForMavenPublication"
-
-publish.dependsOn jar, sourcesJar, javadocJar, testsJar, reportsZip
-publish.dependsOn "generatePomFileForMavenPublication"

@@ -1,7 +1,7 @@
 package com.burrows.library.finance.api.core;
 
 import com.burrows.library.finance.api.model.Config;
-import com.squareup.okhttp.OkHttpClient;
+import okhttp3.OkHttpClient;
 
 public interface Request {
 

@@ -1,8 +1,7 @@
 package com.burrows.library.finance.api.core;
 
 import com.burrows.library.finance.api.model.Config;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
+import okhttp3.OkHttpClient;
 
 import java.io.IOException;
 
@@ -46,7 +45,8 @@ public interface Build {
         }
 
         private String run(final String url) throws IOException {
-            return client.newCall(new Request.Builder().url(url).build()).execute().body().string().trim();
+            return "";
+//            return client.newCall(new Request.Builder().url(url).build()).execute().body().string().trim();
         }
     }
 }

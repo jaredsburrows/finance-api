@@ -30,6 +30,7 @@ description = "Burrows Applications Finance API"
 group = "com.burrows.library"
 version = "0.1.0-SNAPSHOT"
 
+// See: https://docs.oracle.com/javase/tutorial/deployment/jar/packageman.html
 jar {
     manifest {
         attributes "Implementation-Title": project.name
@@ -42,7 +43,7 @@ jar {
 }
 
 dependencies {
-    compile "com.squareup.okhttp:okhttp:2.7.5"
+    compile "com.squareup.okhttp3:okhttp:3.4.1"
     compile "org.apache.commons:commons-lang3:3.4"
 
     testCompile localGroovy()
