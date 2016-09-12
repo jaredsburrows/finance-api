@@ -6,15 +6,12 @@ jdk:
 install: true
 
 script:
-  - ./gradlew clean build jacocoTestReport coveralls -Dscan --configure-on-demand --daemon --parallel --stacktrace
+  - ./gradlew clean build jacocoTestReport coveralls -Dscan --configure-on-demand --parallel --stacktrace
         && .buildscript/publishDocs.sh
 
 branches:
   except:
     - gh-pages
-
-notifications:
-  email: false
 
 sudo: false
 
@@ -28,4 +25,5 @@ cache:
 
 env:
   global:
-    - secure: "Vr8A6xje6YIEGgEfiFAALjc3XrDqR6llYHpPjmBDiBwBdt/EqkSMUtpRu1bF6zwHqNF9vcWC5WItA0xs2xcbbZrhLz1W2PWdzlLXl1vt/+7Pm+gPGApU5SBZqVmobPkxLIV/c5di2R3NOaPEq9C1063XacqTNV7fWLytHi3nOMM="
+    - secure: UMsTbmIt2Wt6mh8Bg+pT/PXyqMvxqkhTGWS9zHezPvXud6ocfTzrXVP/XmUXRSujcQ0Lzh1T+m16KPXZvlSoFBKV6xOODJ++bvVv8izDlITU5mI71Csr12UXTUnFlqdMtYs+F5a5/YdcZfUemM6632FPnHlx75qT5IweMyxs4kg=
+
